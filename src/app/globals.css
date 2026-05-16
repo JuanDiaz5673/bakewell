@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+/*
+ * Bakewell brand palette.
+ * Tailwind class names (bg-crimson, text-maroon-dark, etc.) are inherited from
+ * the original template and intentionally NOT renamed — the variables below
+ * remap them to Bakewell's actual colors:
+ *   maroon  → Guyanese green   (#2E7D32)
+ *   crimson → terracotta accent (#C65D3C)
+ *   gold    → warm bakery gold (kept close to original)
+ *   cream   → Bakewell cream    (#F9FBE7)
+ */
+@theme {
+  --color-maroon: #2E7D32;
+  --color-maroon-dark: #1B5E20;
+  --color-maroon-light: #4CAF50;
+  --color-crimson: #C65D3C;
+  --color-crimson-dark: #A04A2E;
+  --color-gold: #D4A843;
+  --color-gold-light: #E8C974;
+  --color-gold-dark: #B8912E;
+  --color-cream: #F9FBE7;
+  --color-cream-dark: #ECEFD5;
+  --color-warm-white: #FDFEF5;
+  --color-warm-gray: #6B6855;
+  --color-warm-gray-light: #A8A88A;
+  --color-charcoal: #282828;
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Fira Sans', system-ui, sans-serif;
+  --font-script: 'Gloria Hallelujah', cursive;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-charcoal);
+  background-color: var(--color-warm-white);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-script {
+  font-family: var(--font-script);
+}
+
+/* Subtle grain texture overlay */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* Gold shimmer text */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.gold-shimmer {
+  background: linear-gradient(90deg, #B8912E, #E8C974, #D4A843, #E8C974, #B8912E);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 5s linear infinite;
+}
+
+/* Ornamental divider */
+.ornament-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.ornament-divider::before,
+.ornament-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #D4A843, transparent);
+}
+
+/* Fade in up animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.anim-fade-up {
+  animation: fadeUp 0.6s ease-out forwards;
+}
+
+/* Hide scrollbar utility */
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Focus ring */
+*:focus-visible {
+  outline: 2px solid #C65D3C;
+  outline-offset: 2px;
+}
+
+/* Placeholder gradient for images */
+.img-placeholder {
+  background: linear-gradient(135deg, #ECEFD5, #F9FBE7, #ECEFD5);
+}
